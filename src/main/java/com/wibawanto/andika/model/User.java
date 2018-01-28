@@ -1,6 +1,7 @@
 package com.wibawanto.andika.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Collection;
 
 /**
@@ -17,6 +18,8 @@ public class User {
     private String name;
     private String lastName;
     private int active;
+    private BigDecimal creditAmount;
+    private String address;
     private Collection<Role> roles;
 
     @Id
@@ -84,6 +87,24 @@ public class User {
         this.active = active;
     }
 
+    @Column(name = "credit_amount", nullable = false)
+    public BigDecimal getCreditAmount() {
+        return creditAmount;
+    }
+
+    public void setCreditAmount(BigDecimal creditAmount) {
+        this.creditAmount = creditAmount;
+    }
+
+    @Column(name = "address", nullable = false)
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     public Collection<Role> getRoles() {
@@ -93,6 +114,7 @@ public class User {
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
+
 
 }
 
